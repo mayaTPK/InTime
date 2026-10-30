@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f6f7f4">
+    <meta name="description" content="A simple, private time-zone converter that works offline.">
+    <title>InTime — Time zone converter</title>
+    <link rel="icon" href="./icon.svg" type="image/svg+xml">
+    <link rel="manifest" href="./manifest.webmanifest">
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="InTime home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none">
+              <circle cx="16" cy="16" r="13" stroke="currentColor" stroke-width="2.2"/>
+              <path d="M16 8.5v8l5.5 3.2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span>InTime</span>
+        </a>
+        <span class="offline-label"><span class="offline-dot"></span>Offline ready</span>
+      </header>
+
+      <main>
+        <section class="converter" aria-labelledby="page-title">
+          <div class="intro">
+            <h1 id="page-title">Time, translated.</h1>
+            <p>Convert between time zones. Nothing more.</p>
+          </div>
+
+          <form id="converter-form">
+            <div class="form-row">
+              <label class="input-field">
+                <span class="field-label">DATE</span>
+                <input id="event-date" name="date" type="date" required>
+              </label>
+              <label class="input-field time-field">
+                <span class="field-label">TIME</span>
+                <input id="event-time" name="time" type="time" required>
+              </label>
+            </div>
+
+            <label class="zone-field">
+              <span class="field-label">FROM TIME ZONE</span>
+              <select id="source-zone" name="sourceZone" aria-label="From time zone"></select>
+            </label>
+
+            <div class="zone-switch">
+              <span class="switch-line"></span>
+              <button id="swap-zones" class="swap-button" type="button" aria-label="Swap time zones" title="Swap time zones">
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                  <path d="M5 6h10m0 0-3-3m3 3-3 3M15 14H5m0 0 3 3m-3-3 3-3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <span class="switch-line"></span>
+            </div>
+
+            <label class="zone-field">
+              <span class="field-label">TO TIME ZONE</span>
+              <select id="home-zone" name="homeZone" aria-label="To time zone"></select>
+            </label>
+          </form>
+
+          <section class="result" aria-live="polite" aria-atomic="true">
+            <p class="result-label">CONVERTED TIME</p>
+            <p id="conversion-error" class="conversion-error" role="alert" hidden></p>
+            <div id="result-content">
+              <p id="result-time" class="result-time">--:--</p>
+              <p id="result-zone" class="result-zone">—</p>
+              <p id="result-date" class="result-date">—</p>
+            </div>
+            <div id="ambiguity" class="ambiguity" hidden>
+              <p>This time happens twice. Choose one:</p>
+              <div id="ambiguity-options" class="ambiguity-options"></div>
+            </div>
+          </section>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
